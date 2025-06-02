@@ -1,0 +1,44 @@
+.text-mask-wrapper {
+  position: relative;
+  color: var(--main-color, #888);
+  font-weight: bold;
+  font-size: 2rem;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.text-mask-wrapper .mask-text {
+  color: var(--main-color, #888);
+  position: relative;
+  z-index: 1;
+}
+
+.text-mask-wrapper::before {
+  content: attr(data-text);
+  position: fixed;
+  top: var(--y, 0px);
+  left: var(--x, 0px);
+  transform: translate(-50%, -50%);
+  color: var(--spot-color, #fff);
+  font: inherit;
+  pointer-events: none;
+  z-index: 2;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 16px rgba(186,104,200,0.25));
+  overflow: hidden;
+  white-space: pre;
+  transition: color 0.3s;
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 1;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, white 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, white 70%, transparent 100%);
+}

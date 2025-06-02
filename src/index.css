@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-[#E5E5E7] dark:bg-[#313D45] text-[#BA68C8] dark:text-[#BA68C8] font-sans transition-colors duration-300;
+    cursor: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold text-[#BA68C8] dark:text-[#BA68C8];
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed text-[#BA68C8] dark:text-[#BA68C8];
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-[#BA68C8] hover:bg-[#AB47BC] text-white focus:ring-[#BA68C8];
+  }
+  
+  .btn-secondary {
+    @apply btn bg-[#BA68C8] hover:bg-[#AB47BC] text-white focus:ring-[#BA68C8];
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-[#BA68C8] text-[#BA68C8] hover:bg-[#BA68C8]/10 focus:ring-[#BA68C8];
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .card {
+    @apply bg-[#E5E5E7] dark:bg-[#313D45] rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#E5E5E7] dark:bg-[#313D45];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#BA68C8] rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#AB47BC];
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Common animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

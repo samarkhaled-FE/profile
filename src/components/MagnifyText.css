@@ -1,0 +1,30 @@
+.magnify-text {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), color 0.3s, text-shadow 0.3s;
+}
+
+.magnify-text .magnify-text-under {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: #ab47bc;
+  opacity: 0;
+  filter: blur(2px);
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+
+.magnify-text.hovered .magnify-text-under {
+  opacity: 0.7;
+}
+
+.magnify-text.hovered {
+  transform: scale(1.3);
+  color: #ab47bc;
+  text-shadow: 0 0 10px rgba(171, 71, 188, 0.5);
+  z-index: 100;
+}

@@ -1,0 +1,31 @@
+.skills-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  margin-top: 2.5rem;
+}
+
+.skills-marquee {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  animation: marquee 18s linear infinite;
+  will-change: transform;
+}
+
+.skills-marquee img {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(186,104,200,0.10));
+  transition: transform 0.3s;
+}
+
+.skills-marquee img:hover {
+  transform: scale(1.15) rotate(-6deg);
+  filter: drop-shadow(0 4px 16px rgba(186,104,200,0.25));
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

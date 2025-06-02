@@ -1,0 +1,24 @@
+.glass-hover {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.glass-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+  transform: skewX(-20deg);
+  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+
+.glass-hover:hover::before {
+  left: 100%;
+}

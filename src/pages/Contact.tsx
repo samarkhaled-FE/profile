@@ -23,20 +23,13 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      // Reset form after successful submission
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset status after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
-    }, 1500);
+    // تكوين رسالة واتساب جاهزة
+    const { name, email, subject, message } = formData;
+    const text = encodeURIComponent(
+      `Hi Samar,\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`
+    );
+    const whatsappUrl = `https://wa.me/201032068211?text=${text}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (

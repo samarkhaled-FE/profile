@@ -40,7 +40,7 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section bg-white dark:bg-dark-800 animate-on-scroll pb-0 mb-0">
+    <section ref={sectionRef} className="section animate-on-scroll pb-0 mb-0">
       <div className="container-custom pb-0 mb-0">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="mb-4">My Skills</h2>

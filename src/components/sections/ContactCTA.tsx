@@ -1,7 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone } from 'lucide-react';
+import { useRef, FormEvent } from 'react';
 
 const ContactCTA = () => {
+  // مراجع الحقول
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const subjectRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const name = nameRef.current?.value || '';
+    const email = emailRef.current?.value || '';
+    const subject = subjectRef.current?.value || '';
+    const message = messageRef.current?.value || '';
+    const text = encodeURIComponent(
+      `Hi Samar,%0AName: ${name}%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`
+    );
+    const whatsappUrl = `https://wa.me/201032068211?text=${text}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section className="w-full py-20 bg-[#E5E4E7] dark:bg-[#313D45]" style={{ color: '#222' }}>
       <div className="w-full max-w-none px-0 mx-0">
@@ -29,7 +49,7 @@ const ContactCTA = () => {
           </div>
           
           <div className="rounded-lg bg-white dark:bg-[#232B32] p-6 transition-colors">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-primary-900 mb-1">Name</label>
@@ -37,6 +57,7 @@ const ContactCTA = () => {
                     type="text" 
                     id="name" 
                     placeholder="Your name" 
+                    ref={nameRef}
                     className="w-full px-4 py-2 rounded-lg bg-white dark:bg-[#2E3940] border border-primary-300 dark:border-[#2E3940] text-primary-900 dark:text-white placeholder-primary-400 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:shadow-[0_2px_8px_0_rgba(36,45,51,0.25)]" 
                   />
                 </div>
@@ -46,6 +67,7 @@ const ContactCTA = () => {
                     type="email" 
                     id="email" 
                     placeholder="Your email" 
+                    ref={emailRef}
                     className="w-full px-4 py-2 rounded-lg bg-white dark:bg-[#2E3940] border border-primary-300 dark:border-[#2E3940] text-primary-900 dark:text-white placeholder-primary-400 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:shadow-[0_2px_8px_0_rgba(36,45,51,0.25)]" 
                   />
                 </div>
@@ -56,6 +78,7 @@ const ContactCTA = () => {
                   type="text" 
                   id="subject" 
                   placeholder="Subject" 
+                  ref={subjectRef}
                   className="w-full px-4 py-2 rounded-lg bg-white dark:bg-[#2E3940] border border-primary-300 dark:border-[#2E3940] text-primary-900 dark:text-white placeholder-primary-400 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:shadow-[0_2px_8px_0_rgba(36,45,51,0.25)]" 
                 />
               </div>
@@ -65,6 +88,7 @@ const ContactCTA = () => {
                   id="message" 
                   rows={4} 
                   placeholder="Your message" 
+                  ref={messageRef}
                   className="w-full px-4 py-2 rounded-lg bg-white dark:bg-[#2E3940] border border-primary-300 dark:border-[#2E3940] text-primary-900 dark:text-white placeholder-primary-400 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:shadow-[0_2px_8px_0_rgba(36,45,51,0.25)]"
                 ></textarea>
               </div>

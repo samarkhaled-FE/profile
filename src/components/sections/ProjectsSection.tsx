@@ -2,12 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { projectsData } from '../../data/projects';
+import { motion } from "framer-motion";
 
 interface ProjectsSectionProps {
   showAll?: boolean;
+  motionChild?: boolean;
 }
 
-const ProjectsSection = ({ showAll = true }: ProjectsSectionProps) => {
+const ProjectsSection = ({ showAll = true, motionChild = false }: ProjectsSectionProps) => {
   const [category, setCategory] = useState<string>('all');
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -58,7 +60,7 @@ const ProjectsSection = ({ showAll = true }: ProjectsSectionProps) => {
   ];
 
   return (
-    <section ref={sectionRef} className="section bg-white dark:bg-dark-800 animate-on-scroll">
+    <section ref={sectionRef} className="section animate-on-scroll">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="mb-4">Featured Projects</h2>
@@ -88,69 +90,138 @@ const ProjectsSection = ({ showAll = true }: ProjectsSectionProps) => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedProjects.map((project) => (
-            <div 
-              key={project.id} 
-              className="card group hover:scale-[1.02] transition-all duration-300"
-            >
-              <div className="relative overflow-hidden">
-                {/* Project Image */}
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full aspect-[16/9] object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Overlay with links */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-                  <div className="flex gap-3">
-                    {project.liveLink && (
-                      <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
-                        aria-label="Visit live site"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
-                    {project.repoLink && (
-                      <a
-                        href={project.repoLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
-                        aria-label="View source code"
-                      >
-                        <Github size={18} />
-                      </a>
-                    )}
-                  </div>
-                  <span className="bg-primary-500/90 px-3 py-1 text-xs font-medium text-white rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-              
-              {/* Project Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-dark-600 dark:text-gray-400 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-dark-700 text-dark-600 dark:text-gray-300 rounded"
-                    >
-                      {tech}
+          {displayedProjects.map((project, idx) => (
+            motionChild ? (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.18, ease: "circOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="card group hover:scale-[1.02] transition-all duration-300"
+              >
+                <div className="relative overflow-hidden">
+                  {/* Project Image */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full aspect-[16/9] object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  
+                  {/* Overlay with links */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                    <div className="flex gap-3">
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
+                          aria-label="Visit live site"
+                        >
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
+                      {project.repoLink && (
+                        <a
+                          href={project.repoLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
+                          aria-label="View source code"
+                        >
+                          <Github size={18} />
+                        </a>
+                      )}
+                    </div>
+                    <span className="bg-primary-500/90 px-3 py-1 text-xs font-medium text-white rounded-full">
+                      {project.category}
                     </span>
-                  ))}
+                  </div>
+                </div>
+                
+                {/* Project Info */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-dark-600 dark:text-gray-400 mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-dark-700 text-dark-600 dark:text-gray-300 rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <div 
+                key={project.id} 
+                className="card group hover:scale-[1.02] transition-all duration-300"
+              >
+                <div className="relative overflow-hidden">
+                  {/* Project Image */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full aspect-[16/9] object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  
+                  {/* Overlay with links */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                    <div className="flex gap-3">
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
+                          aria-label="Visit live site"
+                        >
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
+                      {project.repoLink && (
+                        <a
+                          href={project.repoLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-white/90 p-2 rounded-full text-dark-800 hover:bg-primary-500 hover:text-white transition-colors"
+                          aria-label="View source code"
+                        >
+                          <Github size={18} />
+                        </a>
+                      )}
+                    </div>
+                    <span className="bg-primary-500/90 px-3 py-1 text-xs font-medium text-white rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Project Info */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-dark-600 dark:text-gray-400 mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-dark-700 text-dark-600 dark:text-gray-300 rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )
           ))}
         </div>
         

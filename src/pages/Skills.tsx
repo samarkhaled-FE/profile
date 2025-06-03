@@ -148,7 +148,7 @@ const Blog = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-900">
+      <section className="py-20 dark:bg-dark-900">
         <div className="container-custom max-w-4xl mx-auto text-center">
           <h2 className="mb-4">Subscribe to My Newsletter</h2>
           <p className="text-dark-600 dark:text-gray-300 mb-8">

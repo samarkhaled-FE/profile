@@ -186,7 +186,8 @@ A creative Frontend Developer with proven experience in building high-performanc
                 <motion.img 
                   src={imgme} 
                   alt="Samar Khaled" 
-                  className="w-full h-auto max-w-xs md:max-w-md lg:max-w-lg object-cover object-bottom rounded-lg"
+                  className="w-full h-auto max-w-xl object-cover rounded-lg"
+                  style={{ objectPosition: 'center 80%' }}
                   animate={{
                     scale: [1, 1.03, 1],
                     rotate: [0, 1, -1, 0],
@@ -199,17 +200,6 @@ A creative Frontend Developer with proven experience in building high-performanc
                   }}
                 />
               </div>
-              <motion.div 
-                className="absolute -bottom-4 -right-4 bg-[#E5E5E7] dark:bg-[#313D45] py-2 px-4 rounded-lg shadow-lg font-mono text-sm font-medium"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <span className="text-[#BA68C8]">frontend</span>
-                <span className="text-[#BA68C8]">()</span>
-                <span className="text-[#BA68C8]"> = </span>
-                <span className="text-[#BA68C8]">passion;</span>
-              </motion.div>
             </motion.div>
 
             <motion.div 

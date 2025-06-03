@@ -40,8 +40,8 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section bg-white dark:bg-dark-800 animate-on-scroll">
-      <div className="container-custom">
+    <section ref={sectionRef} className="section bg-white dark:bg-dark-800 animate-on-scroll pb-0 mb-0">
+      <div className="container-custom pb-0 mb-0">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="mb-4">My Skills</h2>
           <p className="text-dark-600 dark:text-gray-300">
@@ -50,12 +50,9 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* تم حذف قسم Frontend Skills بناءً على طلبك */}
-        </div>
         {/* Skills Marquee */}
-        <div className="skills-marquee-wrapper mt-10">
-          <div className="skills-marquee">
+        <div className="skills-marquee-wrapper mt-10 mb-0 pb-0 flex justify-center" style={{background:'transparent', minHeight:0, height:'auto', border:'none', boxShadow:'none'}}>
+          <div className="skills-marquee" style={{maxWidth: '1200px', width: '100%'}}>
             <img src={reactRouterIcon} alt="React Router" />
             <img src={reduxIcon} alt="Redux" />
             <img src={tailwindIcon} alt="Tailwind CSS" />

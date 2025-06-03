@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Loader from './components/ui/Loader';
@@ -13,24 +13,32 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 function App() {
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   // Scroll to top on route change
   useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 2800); // نفس مدة اللودر
     window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
     <Layout>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      )}
     </Layout>
   );
 }

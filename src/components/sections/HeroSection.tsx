@@ -186,7 +186,7 @@ A creative Frontend Developer with proven experience in building high-performanc
                 <motion.img 
                   src={imgme} 
                   alt="Samar Khaled" 
-                  className="w-full h-[48rem] max-h-[52rem] object-cover object-bottom rounded-lg"
+                  className="w-full h-auto max-w-xs md:max-w-md lg:max-w-lg object-cover object-bottom rounded-lg"
                   animate={{
                     scale: [1, 1.03, 1],
                     rotate: [0, 1, -1, 0],
